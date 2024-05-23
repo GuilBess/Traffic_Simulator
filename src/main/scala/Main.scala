@@ -1,32 +1,31 @@
-import hevs.graphics.FunGraphics
-
 object Main {
-  final val MAX_SPEED: Double = 15
-  final val ACCELERATION: Double = 10
-  final val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly
-  final val ROAD_LENGTH: Int = 50
+  final val MAX_SPEED: Double = 500 //Max speed of the car, in pixel/sec
+  final val ACCELERATION: Double = 50 //Acceleration of the car, in pixel/sec^2
+  final val BRAKING: Double = -100 //Acceleration of the car when braking, in pixel/sec^2
+  final val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly (do that differently maybe)
+  final val ROAD_LENGTH: Int = 500 //length of the road the cars are on, in pixels
   def main(args: Array[String]): Unit = {
     val testCarList: List[Car] = createCars(10, ROAD_LENGTH)
-    testCarList foreach ((x: Car) => println(x.pos.toString))
+    val display = new Display
+    display.init(ROAD_LENGTH)
 
-    val f : FunGraphics = new FunGraphics(800,600)
-    f.drawRect(10, 10, 100, 100)
-
-    for(i <- 0 until 120){
+    while(true){
+      display.drawCars(testCarList)
       testCarList foreach ((x: Car) => nextState(x))
+      Thread.sleep((TIME_STEP*1000).toLong)
     }
   }
 
   private def createCars(nbr: Int, roadLength: Int): List[Car] = {
 
     val distBetweenCars: Int = roadLength/nbr
-    assert(distBetweenCars >= 5) // Lets say we must leave 5 pixels between each car at the start...
+    assert(distBetweenCars >= 50) // Lets say we must leave 50 pixels between each car at the start...
 
     def helper(n: Int, pos: Int): List[Car] = {
       if(n == 0)
-        return Nil
+        Nil
       else
-        return new Car(pos, 0, ACCELERATION, MAX_SPEED)::helper(n-1, pos+distBetweenCars)
+        Car(pos, 0, ACCELERATION, MAX_SPEED)::helper(n-1, pos+distBetweenCars)
     }
 
     helper(nbr, 0)

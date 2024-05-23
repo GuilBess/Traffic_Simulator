@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="created neat function to set up the cars">
-      <change afterPath="$PROJECT_DIR$/src/main/scala/TestFunGraphics.scala" afterDir="false" />
+    <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="created next state function and beginning display class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/Car.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Car.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/Display.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Display.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/Main.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Main.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +127,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716461134918</updated>
-      <workItem from="1716461136225" duration="6199000" />
+      <workItem from="1716461136225" duration="9407000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -145,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716464277546</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="created next state function and beginning display class">
+      <option name="closed" value="true" />
+      <created>1716468154391</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716468154391</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +173,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
     <MESSAGE value="created neat function to set up the cars" />
-    <option name="LAST_COMMIT_MESSAGE" value="created neat function to set up the cars" />
+    <MESSAGE value="created next state function and beginning display class" />
+    <option name="LAST_COMMIT_MESSAGE" value="created next state function and beginning display class" />
   </component>
 </project>
