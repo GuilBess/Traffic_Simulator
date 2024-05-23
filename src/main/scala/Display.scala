@@ -4,14 +4,18 @@ import java.awt.Color
 class Display {
   var f:FunGraphics = null
   var roadLength = 0
+  var d: Double = 0
+
 
   def init(roadLength: Int):Unit = {
     this.roadLength = roadLength
-    f = FunGraphics(roadLength+100, 300)
+    this.d = roadLength / math.Pi
+    f = FunGraphics(roadLength+100, 700)
     f.drawLine(50, 150, roadLength+50, 150)
+    f.displayFPS(true)
   }
 
-  def drawCars(cars: List[Car]): Unit = {
+  def drawCarsLine(cars: List[Car]): Unit = {
     f.frontBuffer.synchronized{
       f.clear
       f.setColor(Color.BLACK)
@@ -19,7 +23,21 @@ class Display {
       f.setColor(Color.RED)
       cars foreach ((car: Car) => f.drawFilledCircle(50+car.pos.toInt-10, 140, 20))
     }
+  }
 
+  def drawCarsCircle(cars: List[Car]): Unit = { //If we want to display the line as a circle instead of a line (fancy)
+    f.frontBuffer.synchronized {
+      f.clear
+      f.setColor(Color.BLACK)
+      f.drawCircle(100, 50, d.toInt)
+      f.setColor(Color.RED)
+      for(i <- cars){
+        val theta: Double = i.pos / (d / 2)
+        val x = (d/2) * math.cos(theta) -10
+        val y = (d/2) * math.sin(theta) -10
+        f.drawFilledCircle((100+d/2 + x).toInt, (50 + d/2 + y).toInt, 20)
+      }
+    }
   }
 
 
