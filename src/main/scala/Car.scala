@@ -1,4 +1,4 @@
-class Car(var pos: Int, var speed: Double, val accel: Double, val maxSpeed: Double) {
+class Car(var pos: Double, var speed: Double, val accel: Double, val maxSpeed: Double) {
 
 
 }
