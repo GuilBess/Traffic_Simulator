@@ -1,11 +1,11 @@
 object Main {
-  final val MAX_SPEED: Double = 250 //Max speed of the car, in pixel/sec
-  final val ACCELERATION: Double = 50 //Acceleration of the car, in pixel/sec^2
+  final val MAX_SPEED: Double = 500 //Max speed of the car, in pixel/sec
+  final val ACCELERATION: Double = 150 //Acceleration of the car, in pixel/sec^2
   final val BRAKING: Double = -500 //Acceleration of the car when braking, in pixel/sec^2
   final val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly (do that differently maybe)
   final val ROAD_LENGTH: Int = 1500 //length of the road the cars are on, in pixels
   def main(args: Array[String]): Unit = {
-    val testCarList: List[Car] = createCars(12, ROAD_LENGTH)
+    val testCarList: List[Car] = createCars(13, ROAD_LENGTH)
     val display = new Display
     display.init(ROAD_LENGTH)
 
@@ -13,11 +13,11 @@ object Main {
 
     while(true){
 
-
+      val t1: Long = System.currentTimeMillis()
       ///////////////////////////////////////////////////////////////////////////////////////////////
       cntTest += 1  //This is the way we introduce perturbation for now, not good, need to implement a better way
       if (cntTest == 200) {
-        testCarList.head.speed = testCarList.head.speed - 50
+        testCarList.head.speed = testCarList.head.speed - 150
         println("AAAAAAA IL FREINE")
       }
       //////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,15 +30,15 @@ object Main {
         else
           nextState(testCarList(i), testCarList(i+1))
       }
-      Thread.sleep((TIME_STEP*1000).toLong) //We wait for the time needed to have 60fps
-    }                   //This assumes the code is really fast. Not good, need to implement a better way
+      while(t1 + TIME_STEP*1000 > System.currentTimeMillis()){} //We wait for the time step in order to have 60fps
+    }
 
   }
 
   private def createCars(nbr: Int, roadLength: Int): List[Car] = {
 
     val distBetweenCars: Int = roadLength/nbr
-    assert(distBetweenCars >= 50) // Lets say we must leave 50 pixels between each car at the start...
+    assert(distBetweenCars > 100) // Lets say we must leave 100 pixels between each car at the start...
 
     def helper(n: Int, pos: Int): List[Car] = {
       if(n == 0)
@@ -64,7 +64,9 @@ object Main {
       val nextPos: Double = car.pos + car.speed * TIME_STEP                                  //car in front.
       if (nextPos > ROAD_LENGTH) car.pos = nextPos - ROAD_LENGTH else car.pos = nextPos      //we should never be able
                                                                                              //to go in front of it
-      val nextSpeed: Double = car.speed + (car.braking * TIME_STEP)
+      val dist = nextCar.pos - car.pos
+      val balancedBraking: Double = if(dist > 0) -math.exp((100 - dist)/30) else -math.exp((100 - ((ROAD_LENGTH - car.pos) + nextCar.pos))/30)
+      val nextSpeed: Double = car.speed + (balancedBraking * TIME_STEP)
       if (nextSpeed <= 0) car.speed = 0 else car.speed = nextSpeed
     }
   }
