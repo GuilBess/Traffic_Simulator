@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="comments and stuff...">
+    <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="Fixed wait time for 60fps, begin working on balanced braking">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/Car.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Car.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/Main.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Main.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +139,7 @@
       <workItem from="1716480505558" duration="53000" />
       <workItem from="1716480662911" duration="358000" />
       <workItem from="1716546541824" duration="789000" />
-      <workItem from="1716965456393" duration="2968000" />
+      <workItem from="1716965456393" duration="8609000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -172,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716480548568</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed wait time for 60fps, begin working on balanced braking">
+      <option name="closed" value="true" />
+      <created>1716968740349</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716968740350</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +203,7 @@
     <MESSAGE value="created neat function to set up the cars" />
     <MESSAGE value="created next state function and beginning display class" />
     <MESSAGE value="comments and stuff..." />
-    <option name="LAST_COMMIT_MESSAGE" value="comments and stuff..." />
+    <MESSAGE value="Fixed wait time for 60fps, begin working on balanced braking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed wait time for 60fps, begin working on balanced braking" />
   </component>
 </project>

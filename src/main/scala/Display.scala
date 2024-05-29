@@ -32,10 +32,13 @@ class Display {
       f.drawCircle(100, 50, d.toInt)
       f.setColor(Color.RED)
       for(i <- cars){
+        if (i.slowest)
+          f.setColor(Color.BLUE)
         val theta: Double = i.pos / (d / 2)
         val x = (d/2) * math.cos(theta) -10
         val y = (d/2) * math.sin(theta) -10
         f.drawFilledCircle((100+d/2 + x).toInt, (50 + d/2 + y).toInt, 20)
+        f.setColor(Color.RED)
       }
     }
   }

@@ -1,1 +1,1 @@
-case class Car(var pos: Double, var speed: Double, val accel: Double, val maxSpeed: Double, val braking: Double)
+case class Car(var pos: Double, var speed: Double, accel: Double, maxSpeed: Double, braking: Double, var leftToBrake: Int = 0, var slowest: Boolean = false)
