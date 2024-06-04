@@ -1,5 +1,7 @@
 import hevs.graphics.FunGraphics
+
 import java.awt.Color
+import java.awt.event.{MouseEvent, MouseListener}
 
 class Display {
   var f:FunGraphics = null
@@ -13,6 +15,24 @@ class Display {
     f = FunGraphics(roadLength+100, 700)
     f.drawLine(50, 150, roadLength+50, 150)
     f.displayFPS(true)
+
+    f.addMouseListener(new MouseListener {
+      override def mouseClicked(e: MouseEvent): Unit = {
+        if(e.getButton == MouseEvent.BUTTON1) {
+          Main.log.writeLogCSV()
+          Main.nbrBrakings = 1
+          Main.log.reset()
+        }
+      }
+
+      override def mousePressed(e: MouseEvent): Unit = null
+
+      override def mouseReleased(e: MouseEvent): Unit = null
+
+      override def mouseEntered(e: MouseEvent): Unit = null
+
+      override def mouseExited(e: MouseEvent): Unit = null
+    })
   }
 
   def drawCarsLine(cars: List[Car]): Unit = {
@@ -20,8 +40,11 @@ class Display {
       f.clear
       f.setColor(Color.BLACK)
       f.drawFillRect(50, 148, roadLength, 4)
-      f.setColor(Color.RED)
-      cars foreach ((car: Car) => f.drawFilledCircle(50+car.pos.toInt-10, 140, 20))
+
+      for(i <- cars) {
+        if (i.slowest) f.setColor(Color.BLUE) else f.setColor(Color.RED)
+        f.drawFilledCircle(50 + i.pos.toInt - 10, 140, 20)
+      }
     }
   }
 
