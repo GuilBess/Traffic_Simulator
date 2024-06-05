@@ -6,15 +6,13 @@ object Main {
   final val BRAKING: Double = -1000 //Acceleration of the car when braking, in pixel/sec^2
   final val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly (do that differently maybe)
   final val ROAD_LENGTH: Int = 1000 //length of the road the cars are on, in pixels
-  var nbrBrakings: Int = 0
+  var nbrBraking: Int = 0
   val log = new CustomLogger
 
   def main(args: Array[String]): Unit = {
     val testCarList: List[Car] = createCars(30, ROAD_LENGTH)
     val display = new Display
     display.init(ROAD_LENGTH)
-
-    var cntTest = 0
 
     while(true){
       var slowest = (MAX_SPEED, 0)
@@ -33,9 +31,10 @@ object Main {
           slowest = (testCarList(i).speed, i)
         testCarList(i).slowest = false
       }
-      log.logSpeed(testCarList)
 
       testCarList(slowest._2).slowest = true
+
+      log.logSpeed(testCarList)
 
       while(t1 + TIME_STEP*1000 > System.currentTimeMillis()){} //We wait for the time step in order to have 60fps
     }
@@ -60,8 +59,8 @@ object Main {
 
   private def nextState(car: Car, nextCar: Car): Unit = {
     val rand = new Random()
-    if (nbrBrakings != 0){
-      nbrBrakings -= 1
+    if (nbrBraking != 0){
+      nbrBraking -= 1
       car.leftToBrake = 30
     }
     if ((nextCar.pos - car.pos > 50/(car.maxSpeed/(car.speed+1)) ||

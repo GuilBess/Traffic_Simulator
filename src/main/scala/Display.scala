@@ -20,7 +20,7 @@ class Display {
       override def mouseClicked(e: MouseEvent): Unit = {
         if(e.getButton == MouseEvent.BUTTON1) {
           Main.log.writeLogCSV()
-          Main.nbrBrakings = 1
+          Main.nbrBraking = 1
           Main.log.reset()
         }
       }
