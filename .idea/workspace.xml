@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="logged avg speed to csv on click">
+    <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="logged jam position, working on phase transition">
+      <change afterPath="$PROJECT_DIR$/src/main/scala/SimSetup.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/SwingApp.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/CustomLogger.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/CustomLogger.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.sbt" beforeDir="false" afterPath="$PROJECT_DIR$/build.sbt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/CustomLogger.scala" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/Display.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Display.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/Main.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Main.scala" afterDir="false" />
     </list>
@@ -58,6 +61,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Scala Class" />
+        <option value="Scala Worksheet" />
       </list>
     </option>
   </component>
@@ -84,6 +88,8 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Main.executor": "Run",
+    "Application.Plotting.executor": "Run",
+    "Application.SwingApp.executor": "Run",
     "Application.TestFunGraphics.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -116,6 +122,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Plotting" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Plotting" />
+      <module name="Traffic Simulator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SwingApp" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="SwingApp" />
+      <module name="Traffic Simulator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestFunGraphics" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="TestFunGraphics" />
       <module name="Traffic Simulator" />
@@ -126,6 +146,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.SwingApp" />
+        <item itemvalue="Application.Plotting" />
         <item itemvalue="Application.TestFunGraphics" />
       </list>
     </recent_temporary>
@@ -153,7 +175,8 @@
       <workItem from="1717404749626" duration="136000" />
       <workItem from="1717421934092" duration="2044000" />
       <workItem from="1717501148499" duration="5369000" />
-      <workItem from="1717570301503" duration="2591000" />
+      <workItem from="1717570301503" duration="9510000" />
+      <workItem from="1717668592345" duration="15693000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -211,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717508272406</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="logged jam position, working on phase transition">
+      <option name="closed" value="true" />
+      <created>1717575323133</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717575323133</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +267,7 @@
     <MESSAGE value="Fixed wait time for 60fps, begin working on balanced braking" />
     <MESSAGE value="implemented braking as fct of the dist btween cars, implemented random break" />
     <MESSAGE value="logged avg speed to csv on click" />
-    <option name="LAST_COMMIT_MESSAGE" value="logged avg speed to csv on click" />
+    <MESSAGE value="logged jam position, working on phase transition" />
+    <option name="LAST_COMMIT_MESSAGE" value="logged jam position, working on phase transition" />
   </component>
 </project>

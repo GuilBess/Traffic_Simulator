@@ -6,3 +6,6 @@ lazy val root = (project in file("."))
   .settings(
     name := "Traffic Simulator"
   )
+
+libraryDependencies += "io.github.cibotech" %% "evilplot" % "0.9.0"
+libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0"

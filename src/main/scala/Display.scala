@@ -15,24 +15,6 @@ class Display {
     f = FunGraphics(roadLength+100, 700)
     f.drawLine(50, 150, roadLength+50, 150)
     f.displayFPS(true)
-
-    f.addMouseListener(new MouseListener {
-      override def mouseClicked(e: MouseEvent): Unit = {
-        if(e.getButton == MouseEvent.BUTTON1) {
-          Main.log.writeLogCSV()
-          Main.nbrBraking = 1
-          Main.log.reset()
-        }
-      }
-
-      override def mousePressed(e: MouseEvent): Unit = null
-
-      override def mouseReleased(e: MouseEvent): Unit = null
-
-      override def mouseEntered(e: MouseEvent): Unit = null
-
-      override def mouseExited(e: MouseEvent): Unit = null
-    })
   }
 
   def drawCarsLine(cars: List[Car]): Unit = {

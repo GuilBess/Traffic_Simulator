@@ -1,42 +1,59 @@
+import java.awt.event.{MouseEvent, MouseListener}
 import scala.util.Random
 
 object Main {
-  final val MAX_SPEED: Double = 250 //Max speed of the car, in pixel/sec
-  final val ACCELERATION: Double = 200 //Acceleration of the car, in pixel/sec^2
-  final val BRAKING: Double = -1000 //Acceleration of the car when braking, in pixel/sec^2
-  final val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly (do that differently maybe)
-  final val ROAD_LENGTH: Int = 1000 //length of the road the cars are on, in pixels
+  var MAX_SPEED: Double = 300 //Max speed of the car, in pixel/sec
+  val ACCELERATION: Double = 150 //Acceleration of the car, in pixel/sec^2
+  val BRAKING: Double = -1500 //Acceleration of the car when braking, in pixel/sec^2
+  val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly (do that differently maybe)
+  val ROAD_LENGTH: Int = 2000 //length of the road the cars are on, in pixels
   var nbrBraking: Int = 0
-  val log = new CustomLogger
-
+  var nbrCars: Int = 5
+  val sim = new SimSetup
+  var carList: List[Car] = createCars(nbrCars, ROAD_LENGTH)
+  var brake1: Int = 0
+  var brake2: Int = 0
   def main(args: Array[String]): Unit = {
-    val testCarList: List[Car] = createCars(30, ROAD_LENGTH)
     val display = new Display
-    display.init(ROAD_LENGTH)
+    //display.init(ROAD_LENGTH)
+
+    //addListeners(display)
 
     while(true){
       var slowest = (MAX_SPEED, 0)
 
+      try assert(nbrCars<=80)
+
       val t1: Long = System.currentTimeMillis()
 
       //Trouver la voiture la plus lente de toute, eq. à trouver le bouchon!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      display.drawCarsLine(testCarList)
-      for(i <- testCarList.indices){
-        if(i == testCarList.length-1)
-          nextState(testCarList(i), testCarList.head)
-        else
-          nextState(testCarList(i), testCarList(i+1))
+      //display.drawCarsLine(carList)
 
-        if(testCarList(i).speed < slowest._1)
-          slowest = (testCarList(i).speed, i)
-        testCarList(i).slowest = false
+      for(i <- carList.indices){
+        if(i == carList.length-1)
+          nextState(carList(i), carList.head)
+        else
+          nextState(carList(i), carList(i+1))
+
+        if(carList(i).speed < slowest._1)
+          slowest = (carList(i).speed, i)
+        carList(i).slowest = false
       }
 
-      testCarList(slowest._2).slowest = true
+      carList(slowest._2).slowest = true
 
-      log.logSpeed(testCarList)
+      sim.getData(carList) match {
+        case 0 =>
+        case 1 => nbrBraking = brake1;
+        case 2 =>
+          println(s"finished for ${nbrCars} cars")
+          nbrCars = nbrCars + 1
+          reload(MAX_SPEED, nbrCars)
+        case 3 => nbrBraking = brake2
+        case _ => println("what")
+      }
 
-      while(t1 + TIME_STEP*1000 > System.currentTimeMillis()){} //We wait for the time step in order to have 60fps
+      //while(t1 + TIME_STEP*1000 > System.currentTimeMillis()){} //We wait for the time step in order to have 60fps
     }
 
   }
@@ -50,7 +67,7 @@ object Main {
         Nil
       else {
         val rand: Random = new Random()
-        Car(pos, 0, ACCELERATION+rand.nextInt(20)-10, MAX_SPEED+rand.nextInt(60)-30, BRAKING+rand.nextInt(60)-30)::helper(n-1, pos+distBetweenCars)
+        Car(pos, 0, ACCELERATION+rand.nextInt(8)-4, MAX_SPEED+rand.nextInt(30)-15, BRAKING)::helper(n-1, pos+distBetweenCars)
       }
     }
 
@@ -63,10 +80,11 @@ object Main {
       nbrBraking -= 1
       car.leftToBrake = 30
     }
+    val nextPos: Double = car.pos + car.speed * TIME_STEP
     if ((nextCar.pos - car.pos > 50/(car.maxSpeed/(car.speed+1)) ||
       ((nextCar.pos - car.pos < 0) && (ROAD_LENGTH - car.pos) + nextCar.pos > 50/(car.maxSpeed/(car.speed+1)))) &&
       car.leftToBrake == 0 && car.waitToStart == 0) {
-      val nextPos: Double = car.pos + car.speed * TIME_STEP
+
       if (nextPos > ROAD_LENGTH) car.pos = nextPos - ROAD_LENGTH else car.pos = nextPos
 
       if (car.speed < car.maxSpeed) {
@@ -75,7 +93,6 @@ object Main {
       }
     }
     else {
-      val nextPos: Double = car.pos + car.speed * TIME_STEP
       if (nextPos > ROAD_LENGTH) car.pos = nextPos - ROAD_LENGTH else car.pos = nextPos
 
       val nextSpeed: Double = car.speed + (car.braking * TIME_STEP)
@@ -85,5 +102,28 @@ object Main {
       if (car.leftToBrake>0) car.leftToBrake -= 1
       if (car.waitToStart>0) car.waitToStart -= 1
     }
+  }
+
+  def reload(maxSpeed: Double, nbrCars: Int): Unit = {
+    MAX_SPEED = maxSpeed
+    carList = createCars(nbrCars, ROAD_LENGTH)
+  }
+
+  def addListeners(display: Display): Unit = {
+    display.f.addMouseListener(new MouseListener {
+      override def mouseClicked(e: MouseEvent): Unit = {
+        if(e.getButton == MouseEvent.BUTTON1) {
+          print("teehee")
+        }
+      }
+
+      override def mousePressed(e: MouseEvent): Unit = null
+
+      override def mouseReleased(e: MouseEvent): Unit = null
+
+      override def mouseEntered(e: MouseEvent): Unit = null
+
+      override def mouseExited(e: MouseEvent): Unit = null
+    })
   }
 }
