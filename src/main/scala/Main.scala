@@ -2,14 +2,14 @@ import java.awt.event.{MouseEvent, MouseListener}
 import scala.util.Random
 
 object Main {
-  var MAX_SPEED: Double = 300 //Max speed of the car, in pixel/sec
-  val ACCELERATION: Double = 150 //Acceleration of the car, in pixel/sec^2
+  var MAX_SPEED: Double = 200 //Max speed of the car, in pixel/sec
+  val ACCELERATION: Double = 75 //Acceleration of the car, in pixel/sec^2
   val BRAKING: Double = -1500 //Acceleration of the car when braking, in pixel/sec^2
   val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly (do that differently maybe)
   val ROAD_LENGTH: Int = 2000 //length of the road the cars are on, in pixels
   var nbrBraking: Int = 0
   var nbrCars: Int = 5
-  val sim = new SimSetup
+  var sim = new SimSetup(0)
   var carList: List[Car] = createCars(nbrCars, ROAD_LENGTH)
   var brake1: Int = 0
   var brake2: Int = 0
@@ -23,6 +23,26 @@ object Main {
       var slowest = (MAX_SPEED, 0)
 
       try assert(nbrCars<=80)
+      catch {
+        case _: AssertionError =>
+          (brake1, brake2) match {
+            case (0,0) =>
+              sim.writeLogCSV()
+              brake1 = 1
+              sim = new SimSetup(1)
+              nbrCars = 5
+              reload(MAX_SPEED, nbrCars)
+            case (1,0) =>
+              sim.writeLogCSV()
+              brake1 = 2
+              sim = new SimSetup(2)
+              nbrCars = 5
+              reload(MAX_SPEED, nbrCars)
+            case _ =>
+              sim.writeLogCSV()
+              System.exit(1)
+          }
+      }
 
       val t1: Long = System.currentTimeMillis()
 

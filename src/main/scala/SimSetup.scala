@@ -1,12 +1,12 @@
 import java.nio.file.{Paths, Files}
 import java.nio.charset.StandardCharsets
-class SimSetup {
+class SimSetup(n: Int) {
   private var speedLog: List[(Double, Double)] = Nil
   private var carsLogs: List[(Int, Double)] = Nil
   private var currTime: Double = 1.0/60
   private var outSpeed: String = "time;avg speed/speedMax\n"
   private var outCars: String = "nbrCars;avg speed/speedMax moy\n"
-  private var nbr: Int = 0
+  private val nbr: Int = n
   var wait4next = 30
   var state: Int = 0 //0 => started, 1 => braked, 2 => ready
   var midBreak = 0
@@ -31,10 +31,10 @@ class SimSetup {
            var tot = 0.0
            for(i <- speedLog)
              tot += i._2
-           carsLogs = List((cars.length, tot/speedLog.length))
+           carsLogs = carsLogs ++ List((cars.length, tot/speedLog.length))
            wait4next += 30
            state = 0
-           writeLogCSV()
+           reset()
            2
          } else 0
 
@@ -44,14 +44,12 @@ class SimSetup {
   }
 
   def writeLogCSV(): Unit = {
-    speedLog foreach ((x: (Double, Double)) => outSpeed += f"${x._1};${x._2}\n")
-    Files.write(Paths.get(s"speed_log${nbr}.csv"), outSpeed.getBytes(StandardCharsets.UTF_8))
+    //speedLog foreach ((x: (Double, Double)) => outSpeed += f"${x._1};${x._2}\n")
+    //Files.write(Paths.get(s"speed_log${nbr}.csv"), outSpeed.getBytes(StandardCharsets.UTF_8))
 
     carsLogs foreach ((x: (Int, Double)) => outCars += f"${x._1};${x._2}\n")
-    Files.write(Paths.get(s"carsLog.csv"), outCars.getBytes(StandardCharsets.UTF_8))
+    Files.write(Paths.get(s"carsLog${nbr}.csv"), outCars.getBytes(StandardCharsets.UTF_8))
 
-
-    nbr += 1
     reset()
   }
 

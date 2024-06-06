@@ -1,19 +1,25 @@
 import com.cibo.evilplot._
 import com.cibo.evilplot.geometry._
-
 import com.cibo.evilplot._
 import com.cibo.evilplot.plot._
 import com.cibo.evilplot.plot.aesthetics.DefaultTheme._
 import com.cibo.evilplot.numeric.Point
+
 import scala.swing._
 import scala.swing.event._
-import java.awt.{Graphics2D, Color, geom}
+import java.awt.{Color, Graphics2D, geom}
+import scala.io.Source
 
 object EvilPlot {
-  val data = Seq.tabulate(100) { i =>
-    Point(i.toDouble, scala.util.Random.nextDouble())
+  var data: List[Point] = Nil
+
+  val src = Source.fromFile("carsLog2.csv")
+  for (i<-src.getLines().drop(1)){
+    val temp = i.split(";")
+    data = data ++ List(new Point(temp(0).toInt, temp(1).toDouble))
   }
-  val bf = ScatterPlot(data).render().asBufferedImage
+
+  val bf = ScatterPlot(data).xAxis().yAxis().frame().render().asBufferedImage
 }
 
 object SwingApp extends SimpleSwingApplication {
