@@ -11,7 +11,7 @@ object Main {
   var nbrCars: Int = 5 //Number of cars in the simulation
   var sim = new SimSetup(0) // create the simulation helper object
   var carList: List[Car] = createCars(nbrCars, ROAD_LENGTH)
-  var brake1: Int = 0 // brake controls for sim
+  var brake1: Int = 1 // brake controls for sim
   var brake2: Int = 0
   def main(args: Array[String]): Unit = {
     val display = new Display
