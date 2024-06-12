@@ -66,7 +66,7 @@ object Main {
         case 1 => nbrBraking = brake1; //We brake
         case 2 => //Finished, starting again with other settings
           println(s"finished for ${nbrCars} cars")
-          nbrCars = nbrCars + 1
+          nbrCars = nbrCars + //we add a car to the road
           reload(MAX_SPEED, nbrCars)
         case 3 => nbrBraking = brake2 //When we are in the 2 brake times setup
         case _ => println("what")
