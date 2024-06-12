@@ -3,9 +3,9 @@
 ## Description
 
 The goal of this project is to be a traffic simulator. We aim to analyse traffic
-in different of speed and acceleration to see to what point the configuration changes traffic flow.
-Our goal is to see if we can then see for ourselves different "types" of traffic by analysing the data
-and plotting it.
+for different speed and acceleration values to see to what point the configuration changes traffic flow.
+In term, we want to see different "types" of traffic by analysing the data and plotting it with a few distinct
+starting configuration
 
 ## Getting Started
 

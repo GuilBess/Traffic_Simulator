@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64626ac3-6295-458a-bf23-a7adff21eb70" name="Changes" comment="comments, cleaning and stuff">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/Main.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Main.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +67,9 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
@@ -171,7 +176,7 @@
       <workItem from="1717501148499" duration="5369000" />
       <workItem from="1717570301503" duration="9510000" />
       <workItem from="1717668592345" duration="19587000" />
-      <workItem from="1718171598707" duration="4689000" />
+      <workItem from="1718171598707" duration="10024000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -261,7 +266,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718176228548</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="comments, cleaning and stuff">
+      <option name="closed" value="true" />
+      <created>1718176314542</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1718176314542</updated>
+    </task>
+    <task id="LOCAL-00013" summary="comments, cleaning and stuff">
+      <option name="closed" value="true" />
+      <created>1718176554301</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718176554301</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,5 +312,16 @@
     <MESSAGE value="modified code to run 3 times in a row, braking at different times" />
     <MESSAGE value="comments, cleaning and stuff" />
     <option name="LAST_COMMIT_MESSAGE" value="comments, cleaning and stuff" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/Main.scala</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

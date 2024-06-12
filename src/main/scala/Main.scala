@@ -2,8 +2,8 @@ import java.awt.event.{MouseEvent, MouseListener}
 import scala.util.Random
 
 object Main {
-  val MAX_SPEED: Double = 200 //Max speed of the car, in pixel/sec
-  val ACCELERATION: Double = 20 //Acceleration of the car, in pixel/sec^2
+  val MAX_SPEED: Double = 300 //Max speed of the car, in pixel/sec
+  val ACCELERATION: Double = 50 //Acceleration of the car, in pixel/sec^2
   val BRAKING: Double = -1500 //Acceleration of the car when braking, in pixel/sec^2
   val TIME_STEP: Double = 1.0/60.0 //we want a 60 fps simulation, so we set the time step accordingly
   val ROAD_LENGTH: Int = 2000 //length of the road the cars are on, in pixels
@@ -11,7 +11,7 @@ object Main {
   var nbrCars: Int = 5 //Number of cars in the simulation
   var sim = new SimSetup(0) // create the simulation helper object
   var carList: List[Car] = createCars(nbrCars, ROAD_LENGTH)
-  var brake1: Int = 1 // brake controls for sim
+  var brake1: Int = 0 // brake controls for sim
   var brake2: Int = 0
   def main(args: Array[String]): Unit = {
     val display = new Display
