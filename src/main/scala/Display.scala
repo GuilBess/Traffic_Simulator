@@ -4,7 +4,7 @@ import java.awt.Color
 import java.awt.event.{MouseEvent, MouseListener}
 
 class Display {
-  var f:FunGraphics = null
+  var f:FunGraphics = null //I dont like this, felt so bad I had to put a try catch in display methods
   var roadLength = 0
   var d: Double = 0
 
@@ -18,6 +18,13 @@ class Display {
   }
 
   def drawCarsLine(cars: List[Car]): Unit = {
+    try {
+      assert(f != null)
+    }catch {
+      case e: AssertionError =>
+        println("Please use the init method before using the display")
+        System.exit(-1)
+    }
     f.frontBuffer.synchronized{
       f.clear
       f.setColor(Color.BLACK)
@@ -31,6 +38,13 @@ class Display {
   }
 
   def drawCarsCircle(cars: List[Car]): Unit = { //If we want to display the line as a circle instead of a line (fancy)
+    try {
+      assert(f != null)
+    }catch {
+      case e: AssertionError =>
+        println("Please use the init method before using the display")
+        System.exit(-1)
+    }
     f.frontBuffer.synchronized {
       f.clear
       f.setColor(Color.BLACK)

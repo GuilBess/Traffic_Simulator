@@ -8,46 +8,47 @@ class SimSetup(n: Int) {
   private var outCars: String = "nbrCars;avg speed/speedMax moy\n"
   private val nbr: Int = n
   var wait4next = 30
-  var state: Int = 0 //0 => started, 1 => braked, 2 => ready
+  var state: Int = 0 //0 => started, 1 => braked, 2 => ready for data collection
   var midBreak = 0
 
   def getData(cars: List[Car]): Int = { //we log the current average speed along with the time of the simulation
 
     currTime += 1.0/60
-     state match{   //We wait for a bit of time for the traffic to stabilise before and after braking
-       case 0 =>    //Then we log the speed
+    //we wait a sufficient time for the traffic to stabilize, here it's 30s in each state
+     state match{
+       case 0 =>    //Start state, start of the sim, wait for cars to go up to speed and traffic to be stable
          if (currTime > wait4next) {wait4next += 30; state = 1; 1} else 0
 
-       case 1 =>
-         if (currTime > wait4next) {wait4next += 30; state = 2}
-         if (currTime > wait4next-10 && midBreak == 0) {midBreak = 1; 3} else 0
-
-       case 2 =>
+       case 1 => //Braking state, we wait again to stabilize after braking to see if there is a jam or if traffic
+         if (currTime > wait4next) {wait4next += 30; state = 2} //returns to normal
+         if (currTime > wait4next-10 && midBreak == 0) {midBreak = 1; 3} else 0 //This sends the signal for the second
+                                                                                //braking point if we use it
+       case 2 => //Data capture state, we capture data for 30s and retrieve the average speed of all cars
          midBreak = 0
          var speedTot: Double = 0
          for (i <- cars) speedTot += i.speed/i.maxSpeed
-         speedLog = speedLog ++ List((currTime, speedTot/cars.length))
-         if (currTime > wait4next) {
+         speedLog = speedLog ++ List((currTime, speedTot/cars.length)) //Logging the data, speed is the ratio btween
+                                                                       //max speed and current speed of car
+         if (currTime > wait4next) { //If we are at the end of this part of the sim,
            var tot = 0.0
            for(i <- speedLog)
              tot += i._2
-           carsLogs = carsLogs ++ List((cars.length, tot/speedLog.length))
+           carsLogs = carsLogs ++ List((cars.length, tot/speedLog.length)) //Add the average to the log
            wait4next += 30
-           state = 0
-           reset()
-           2
+           state = 0 //Start state again
+           reset() //reset the sim
+           2 //signal to main that we are done
          } else 0
 
-       case _ => println("wrong state"); 0
+       case _ => println("wrong state"); 0 //whaaaaat? should not happen 🤨
      }
 
   }
 
   def writeLogCSV(): Unit = {
-    //speedLog foreach ((x: (Double, Double)) => outSpeed += f"${x._1};${x._2}\n")
-    //Files.write(Paths.get(s"speed_log${nbr}.csv"), outSpeed.getBytes(StandardCharsets.UTF_8))
-
+    //making csv compliant string
     carsLogs foreach ((x: (Int, Double)) => outCars += f"${x._1};${x._2}\n")
+    //Writing the log is a csv file
     Files.write(Paths.get(s"carsLog${nbr}.csv"), outCars.getBytes(StandardCharsets.UTF_8))
 
     reset()
